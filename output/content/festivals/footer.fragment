@@ -1,0 +1,42 @@
+<footer class="bg-gray-800 text-gray-300">
+  <div class="container mx-auto px-6 py-12 lg:px-8">
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+      
+      <div>
+        <h5 class="text-lg font-semibold text-white mb-4">Connaught Place</h5>
+        <ul class="space-y-2">
+          <li><a href="https://www.connaughtplace.org/" class="hover:text-white hover:underline transition-colors duration-200">Home</a></li>
+          <li><a href="https://www.connaughtplace.org/photos-blog/" class="hover:text-white hover:underline transition-colors duration-200">Photos and Blog</a></li>
+          <li><a href="https://www.connaughtplace.org/red-fort/" class="hover:text-white hover:underline transition-colors duration-200">Red Fort</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-lg font-semibold text-white mb-4">Delhi Tour</h5>
+        <ul class="space-y-2">
+          <li><a href="https://www.connaughtplace.org/delhi/" class="hover:text-white hover:underline transition-colors duration-200">Old Delhi</a></li>
+          <li><a href="https://www.connaughtplace.org/red-fort/" class="hover:text-white hover:underline transition-colors duration-200">Red Fort Delhi</a></li>
+          <li><a href="https://www.connaughtplace.org/kinari-bazaar/" class="hover:text-white hover:underline transition-colors duration-200">Kinari Bazaar</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-lg font-semibold text-white mb-4">Pages</h5>
+        <ul class="space-y-2">
+          <li><a href="https://www.connaughtplace.org/festivals/Vijayadashmi photos of Connaughtplace.html" class="hover:text-white hover:underline transition-colors duration-200">Vijayadashmi Photos Of Connaughtplace</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center text-sm text-gray-400">
+      <p class="text-sm text-gray-400">ConnaughtPlace in New Delhi India</p>
+    </div>
+
+    <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col items-center justify-between sm:flex-row">
+      <p class="text-sm text-gray-400">&copy; 2026 ConnaughtPlace. All rights reserved.</p>
+      
+    </div>
+
+  </div>
+</footer>
