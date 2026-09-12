@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Qutub Minar: India's Iconic Victory Tower | Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light background for contrast */
+        }
+        .prose-custom {
+            /* Customizing the main content area for better readability */
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .prose-custom h2 {
+            font-size: 2.25rem; /* 4xl */
+            font-weight: 800;
+            color: #047857; /* Dark Green Primary */
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .prose-custom h3 {
+            font-size: 1.5rem; /* 2xl */
+            font-weight: 700;
+            color: #065f46; /* Medium Green */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .prose-custom p, .prose-custom ul, .prose-custom li, .prose-custom table {
+            color: #374151; /* Darker gray text */
+            line-height: 1.75;
+        }
+        .hero-banner {
+            /* Using a high-impact image of Qutub Minar */
+            background-image: url('https://storage.googleapis.com/kreatewebsites/photos1000/qutub1.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            min-height: 400px;
+        }
+        .tab-button.active {
+            background-color: #047857; /* Dark Green */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .fact-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+<link href="https://storage.googleapis.com/css-designs/purple/kreatewebsites.production.css" rel="stylesheet"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9B1T71M2XL"></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9B1T71M2XL');
+</script></head>
+<body class="bg-gray-50">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-3xl font-black text-[#047857]">
+                QUTUB COMPLEX
+            </div>
+            <!-- CTA Button -->
+            <button class="px-5 py-2 bg-yellow-500 text-gray-900 font-bold rounded-full hover:bg-yellow-600 transition duration-300 transform hover:scale-105 shadow-md" onclick="document.getElementById('visit').scrollIntoView({ behavior: 'smooth' });">
+                Plan Your Visit
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero-banner flex items-center justify-center relative">
+        <div class="text-center p-8 bg-black bg-opacity-50 rounded-2xl shadow-2xl mx-4 max-w-4xl">
+            <h1 class="text-5xl sm:text-7xl font-extrabold text-white tracking-tight leading-tight">
+                Qutub Minar: Where Delhi's History Begins
+            </h1>
+            <p class="text-2xl text-gray-200 mt-4 font-light">
+                Uncover the tallest brick minaret in the world, an iconic example of Indo-Islamic architecture.
+            </p>
+            <button class="mt-8 px-8 py-3 bg-[#10b981] text-white text-lg font-semibold rounded-lg hover:bg-[#059669] transition duration-300 shadow-xl" onclick="document.getElementById('tabs-container').scrollIntoView({ behavior: 'smooth' });">
+                Start the Journey Below ↓
+            </button>
+        </div>
+    </div>
+
+    <!-- Key Facts Section (Interactive/Highlight) -->
+    <section class="prose-custom -mt-20 relative z-10 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="fact-card bg-white p-6 rounded-xl text-center border-t-4 border-[#047857] hover:bg-gray-50 transition duration-300">
+                <p class="text-5xl font-extrabold text-[#047857]">72.5</p>
+                <p class="text-xl font-bold mt-2 text-gray-800">Meters Tall</p>
+                <p class="text-sm text-gray-500">World's tallest brick minaret.</p>
+            </div>
+
+            <div class="fact-card bg-white p-6 rounded-xl text-center border-t-4 border-[#047857] hover:bg-gray-50 transition duration-300">
+                <p class="text-5xl font-extrabold text-[#047857]">1192</p>
+                <p class="text-xl font-bold mt-2 text-gray-800">Commissioned</p>
+                <p class="text-sm text-gray-500">By Qutb-ud-din Aibak as a victory tower.</p>
+            </div>
+
+            <div class="fact-card bg-white p-6 rounded-xl text-center border-t-4 border-[#047857] hover:bg-gray-50 transition duration-300">
+                <p class="text-5xl font-extrabold text-[#047857]">UNESCO</p>
+                <p class="text-xl font-bold mt-2 text-gray-800">World Heritage Site</p>
+                <p class="text-sm text-gray-500">Inscribed in 1993 for its significance.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Interactive Tabbed Content -->
+    <main class="py-12 px-4 sm:px-6 lg:px-8">
+        <section class="prose-custom" id="tabs-container">
+            
+            <h2 class="text-center mb-8">Detailed Exploration</h2>
+
+            <!-- Tab Buttons -->
+            <div class="flex flex-wrap justify-center border-b-2 border-gray-200 mb-8 bg-white p-2 rounded-xl shadow-lg">
+                <button class="tab-button active px-6 py-3 m-1 font-semibold rounded-lg text-lg transition duration-300" data-tab="history">
+                    History &amp; Legacy
+                </button>
+                <button class="tab-button px-6 py-3 m-1 font-semibold rounded-lg text-lg text-gray-600 hover:bg-gray-100 transition duration-300" data-tab="architecture">
+                    Architecture &amp; Design
+                </button>
+                <button class="tab-button px-6 py-3 m-1 font-semibold rounded-lg text-lg text-gray-600 hover:bg-gray-100 transition duration-300" data-tab="visit-guide">
+                    Visitor Guide &amp; FAQs
+                </button>
+            </div>
+
+            <!-- Tab Content Area -->
+            <div class="bg-white p-6 sm:p-10 rounded-2xl shadow-xl border border-gray-100">
+
+                <!-- 1. History Tab -->
+                <article class="tab-content active" id="tab-history">
+                    <h2>History: From Aibak to UNESCO</h2>
+                    <p class="text-lg italic text-gray-700 border-l-4 border-yellow-500 pl-4 mb-8">
+                        Here are a few options, all similar in length:
+
+*   Qutub Minar tells a story of conquest, survival, and power, spanning eras of Delhi Sultans and the British.
+*   From Sultans to Raj, the Qutub Minar embodies ambition, triumphs, and endurance across many centuries.
+*   Built over ages, Qutub Minar stands for ambition, triumph, and strength, reflecting diverse ruling powers.
+*   Across centuries, from Sultanate to Raj, the Qutub Minar chronicles ambition, victories, and enduring spirit.
+                    </p>
+                    
+                    <!-- Image 1: Qutb Complex View -->
+                    <img alt="A wide view of the Qutub Minar complex including the ruins of the Quwwat-ul-Islam Mosque." class="w-full h-auto rounded-xl my-6 shadow-xl" onerror="this.onerror=null; this.src='https://placehold.co/800x400/CCCCCC/333333?text=Qutb+Complex+Image+Unavailable';" src="https://storage.googleapis.com/kreatewebsites/photos1000/qutub-minar-2.jpg"/>
+
+                    <h3>Founding &amp; Construction (12th - 14th Century)</h3>
+                    <p>
+                        The story of Qutub Minar begins with the Delhi Sultanate when Qutb-ud-din Aibak, the first Sultan of Delhi, commissioned its construction in 1192. Aibak laid the foundation and first level of the tower, symbolizing victory, before his death. His successor, Shamsuddin Iltutmish, completed the structure by adding three more stories around 1220 CE.
+                    </p>
+                    <p>
+                        Throughout the years, a series of leaders contributed to the current appearance of the structure. In **1368**, Sultan **Firuz Shah Tughlaq** reconstructed the minaret after it was hit by lightning, incorporating a **fifth level** to achieve its ultimate stature.
+                    </p>
+
+                    <h3>The Qutb Complex: Beyond the Minar</h3>
+                    <p>
+                        Later rulers expanded the Qutub complex, highlighting the renowned **Iron Pillar** predating the minaret. This 4th-century masterpiece demonstrates the remarkable resistance to rust of ancient Indian metalwork. The complex also features the unfinished **Alai Minar**, started by Alauddin Khalji circa 1311.
+                    </p>
+
+                    <h3>Restoration and Recognition</h3>
+                    <p>
+                        In **1993**, the UNESCO World Heritage status was awarded to the **Qutb Minar complex**, renowned for its historical importance.
+                    </p>
+                </article>
+
+                <!-- 2. Architecture Tab -->
+                <article class="tab-content" id="tab-architecture">
+                    <h2>Architecture &amp; Design: Indo-Islamic Fusion</h2>
+
+                    <h3>Style and Materials</h3>
+                    <p>
+                        The Qutub Minar is famous for its unique blend of Central Asian Islamic design and native art, showcasing an Indo-Islamic style. The minaret is easily recognized by its five distinct levels, each with a prominent balcony.
+                    </p>
+                    <p>
+                        The first three levels of the tower were constructed using red sandstone, while the upper levels, built by the Tughlaq, were made of a combination of marble and sandstone, giving it a lighter appearance. The base of the tower measured around 14.3 meters, tapering to 2.7 meters at the top.
+                    </p>
+                    
+                    <!-- Image 2: Close-up of Fluting/Details -->
+                    <img alt="Close-up of the intricate stone fluting and calligraphy on the Qutub Minar's exterior." class="w-full h-auto rounded-xl my-6 shadow-xl sm:w-2/3 lg:w-1/2 mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Architecture+Detail+Image+Unavailable';" src="https://storage.googleapis.com/kreatewebsites/photos1000/qutub4.jpg"/>
+
+
+                    <h3>Decorative Features &amp; Calligraphy</h3>
+                    <p>
+                        The exterior is adorned with intricate details. The facade of the tower is adorned with ribbed patterns, featuring graceful curves and bold angles that create a dynamic visual rhythm. Balconies on each level are supported by ornate corbels, intricately sculpted with designs inspired by muqarnas, such as cellular or dripping-icicle motifs.
+                    </p>
+                    <p>
+                        The sandstone showcases Quranic verses in elegant Arabic calligraphy, as well as inscriptions in Nagari characters, symbolizing the cultural blend of the Sultanate.
+                    </p>
+                    
+                    <h3>Key Dimensions</h3>
+                    <div class="table-responsive mt-6">
+                        <table class="min-w-full divide-y divide-gray-200 rounded-xl overflow-hidden shadow-lg bg-gray-50">
+                            <thead class="bg-green-100 text-gray-800">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">Feature</th>
+                                    <th class="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">Measurement</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Total height</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                        $\approx 72.5 \, \text{m} \, (238 \, \text{ft})$
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-100 bg-white">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Diameter at base</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                        $\approx 14.3 \, \text{m} \, (47 \, \text{ft})$
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Steps (internal)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">379 steps (closed to public)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <!-- 3. Visitor Guide Tab -->
+                <article class="tab-content" id="tab-visit-guide">
+                    <section id="visit">
+                        <h2>Plan Your Visit: Timings, Tickets, and Tips</h2>
+
+                        <h3>Ticketing and Timings</h3>
+                        <p>
+                            Qutub Minar greets visitors every day, opening around 7:00 AM and closing at dusk, with seasonal variations (5-6 PM). Best time to visit: October-March for pleasant weather or come early to avoid crowds.
+                        </p>
+                        <div class="table-responsive mt-6">
+                            <table class="min-w-full divide-y divide-gray-200 rounded-xl overflow-hidden shadow-lg bg-gray-50">
+                                <thead class="bg-red-100 text-gray-800">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">Visitor Category</th>
+                                        <th class="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">Ticket Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Indian Citizens (Adults)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">₹40 (on-site) / ₹35 (online)</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-100 bg-white">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Foreign Tourists (Adults)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">₹600 (approx. US \$7)</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Children (under 15 years)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-semibold">Free entry</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-sm text-gray-500 italic mt-2">Booking online is recommended to skip the queue.</p>
+
+                        <h3>Must-See Highlights</h3>
+                        <ul class="list-disc list-inside space-y-2 mt-4 ml-4">
+                            <li>**Iron Pillar:** The 4th-century rust-resistant metallurgical marvel.</li>
+                            <li>**Quwwat-ul-Islam Mosque:** Ruins of India’s earliest mosque.</li>
+                            <li>**Alai Darwaza:** The intricately carved southern gateway.</li>
+                            <li>**Alai Minar:** The massive, unfinished tower project.</li>
+                            <li>**Tomb of Iltutmish:** Ornate red sandstone tomb (1235 CE).</li>
+                        </ul>
+
+                        <h3>Transportation</h3>
+                        <p>
+                            Option 1 (Concise):
+
+&gt; Take the **Yellow Line Metro** to **Qutub Minar Station** (1.5 km). Taxis and ride-hails are available. Address: **Mehrauli, Delhi 110030**.
+---
+Option 2 (Slightly more detail):
+
+&gt; Access is easy via the **Delhi Metro Yellow Line** to **Qutub Minar station** (1.5 km). Cabs and ride-sharing services are also an option. Located in **Mehrauli, New Delhi, Delhi 110030**.
+---
+Option 3 (Emphasizing distance):
+
+&gt;  Reach Qutub Minar by the **Yellow Line** to **Qutub Minar Station** (1.5km). Taxis and ride-hailing services are nearby.  Address: **Mehrauli, Delhi 110030**.
+                        </p>
+                    </section>
+                    
+                    <!-- FAQ Section (Re-used for Guide Tab) -->
+                    <section class="mt-8" id="faqs">
+                        <h2>Quick FAQs</h2>
+                        <div class="space-y-4 mt-4">
+                            <details class="group bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 cursor-pointer">
+                                <summary class="flex justify-between items-center font-semibold text-[#065f46] leading-relaxed">
+                                    Is photography allowed at Qutub Minar?
+                                    <svg class="w-5 h-5 transition duration-300 transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                </summary>
+                                <p class="mt-2 text-gray-700 border-t border-gray-200 pt-2">
+                                    Personal use photography is allowed, but operating drones is not permitted under any circumstances.
+                                </p>
+                            </details>
+
+                            <details class="group bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 cursor-pointer">
+                                <summary class="flex justify-between items-center font-semibold text-[#065f46] leading-relaxed">
+                                    Can visitors climb to the top of Qutub Minar?
+                                    <svg class="w-5 h-5 transition duration-300 transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                </summary>
+                                <p class="mt-2 text-gray-700 border-t border-gray-200 pt-2">
+                                    The interior of the tower has been closed to visitors since 1981 for safety reasons.
+                                </p>
+                            </details>
+
+                            <details class="group bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 cursor-pointer">
+                                <summary class="flex justify-between items-center font-semibold text-[#065f46] leading-relaxed">
+                                    Is the site accessible for wheelchair users?
+                                    <svg class="w-5 h-5 transition duration-300 transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                </summary>
+                                <p class="mt-2 text-gray-700 border-t border-gray-200 pt-2">
+                                    Below are some choices that are all comparable in size and significance:
+
+*   **Parts of the main area are accessible via paved paths.**
+*   **The complex offers partial accessibility, including some paved routes.**
+*   **With paved pathways, accessibility is limited within the complex.**
+*   **Paved pathways provide partial access to sections of the main site.**
+                                </p>
+                            </details>
+
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300">
+<div class="container mx-auto px-6 py-12 lg:px-8">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Connaught Place</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/">Home</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/photos-blog/">Photos and Blog</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/red-fort/">Red Fort</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Delhi Tour</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/">Old Delhi</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/red-fort/">Red Fort Delhi</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/kinari-bazaar/">Kinari Bazaar</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Pages</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/old-delhi-info.html">Old Delhi Info</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/qutubminar-images.html">Qutubminar Images</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/qutubminar-photos-blog.html">Qutubminar Photos Blog</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-8 text-center text-sm text-gray-400">
+<p class="text-sm text-gray-400">Delhi Guide - Hidtory and New Markets</p>
+</div>
+<div class="mt-12 border-t border-gray-700 pt-8 flex flex-col items-center justify-between sm:flex-row">
+<p class="text-sm text-gray-400">© 2026 Connaught Place and Delhi Website. All rights reserved.</p>
+</div>
+</div>
+</footer>
+
+    <!-- JavaScript for Tab Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            const switchTab = (tabName) => {
+                // Remove active class from all buttons and contents
+                tabs.forEach(tab => tab.classList.remove('active'));
+                contents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to the clicked button and corresponding content
+                const activeTabButton = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
+                const activeTabContent = document.getElementById(`tab-${tabName.replace('-', '_')}`); // Handle dash in ID
+
+                if (activeTabButton) {
+                    activeTabButton.classList.add('active');
+                }
+                if (activeTabContent) {
+                    activeTabContent.classList.add('active');
+                }
+            };
+
+            tabs.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabName = button.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+
+            // Initialize: set the first tab as active on load
+            switchTab('history');
+        });
+    </script>
+
+
+</body></html>

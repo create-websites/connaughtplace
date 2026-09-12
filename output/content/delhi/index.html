@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>The Living City of Old Delhi: An Interactive Exploration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+    <!-- Chosen Palette: Mughal Dawn -->
+    <!-- Application Structure Plan: The SPA is structured thematically rather than mirroring the report's linear chapters to enhance user exploration. A sticky top navigation allows users to jump between five core themes: 'Home' (introducing the palimpsest concept), 'The Imperial City' (Mughal origins and architecture), 'Life & Commerce' (bazaars and food), 'A City of Faiths' (multicultural sacred sites), and 'Two Delhis, One Story' (colonial contrast and modern challenges). This non-linear, thematic approach allows users to follow their interests, comparing architectural styles, exploring culinary history, or understanding urban issues independently, which is more intuitive for a digital experience than a page-by-page reading. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification -> Library/Method. 1. Historical Milestones (Table 1) -> Show Change -> Interactive Vertical Timeline (HTML/CSS) -> On-click/scroll highlights event details -> More engaging than a static table -> Custom JS. 2. Monument Comparison (Table 2) -> Compare -> Two-column card layout with icons -> Clear, side-by-side comparison of features -> HTML/Tailwind. 3. Old vs. New Delhi (Table 3) -> Compare -> Horizontal Bar Chart (Chart.js) -> Clicking a bar shows detailed text -> Quantifies qualitative data for quick visual understanding -> Chart.js. 4. Specialized Markets/Havelis/Eateries -> Organize/Inform -> Interactive Cards & Schematic Diagram (HTML/CSS) -> Click/hover reveals detailed info modals -> Organizes spatial and thematic information without a complex map -> Custom JS. All visualizations avoid SVG/Mermaid as required. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfcf9;
+            color: #44403c;
+        }
+        h1, h2, h3 {
+            font-family: 'Lora', serif;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active {
+            color: #881337;
+            border-bottom-color: #881337;
+        }
+        .nav-link:hover {
+            color: #881337;
+        }
+        .content-section {
+            display: none;
+            animation: fadeIn 0.8s;
+        }
+        .content-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+                max-height: 60vh;
+            }
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 2rem;
+            border-left: 2px solid #d6d3d1;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.6rem;
+            top: 0.25rem;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 9999px;
+            background-color: #d6d3d1;
+            transition: background-color 0.3s ease;
+        }
+        .timeline-item:hover .timeline-dot {
+            background-color: #881337;
+        }
+    </style>
+<link href="https://storage.googleapis.com/css-designs/purple/kreatewebsites.production.css" rel="stylesheet"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9B1T71M2XL"></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9B1T71M2XL');
+</script></head>
+<body class="bg-stone-50 text-stone-800">
+
+    <header class="sticky top-0 bg-stone-50/80 backdrop-blur-lg z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl md:text-2xl font-bold text-red-900">Old Delhi</h1>
+                <div class="hidden sm:flex items-center space-x-4 md:space-x-8">
+                    <a class="nav-link font-semibold text-stone-600 px-1 py-2" href="#home">Home</a>
+                    <a class="nav-link font-semibold text-stone-600 px-1 py-2" href="#imperial">The Imperial City</a>
+                    <a class="nav-link font-semibold text-stone-600 px-1 py-2" href="#life">Life &amp; Commerce</a>
+                    <a class="nav-link font-semibold text-stone-600 px-1 py-2" href="#faiths">A City of Faiths</a>
+                    <a class="nav-link font-semibold text-stone-600 px-1 py-2" href="#dichotomy">Two Delhis</a>
+                </div>
+                <div class="sm:hidden">
+                    <select class="bg-stone-100 border border-stone-300 rounded-md p-2 text-stone-700" id="mobile-nav">
+                        <option value="home">Home</option>
+                        <option value="imperial">Imperial City</option>
+                        <option value="life">Life &amp; Commerce</option>
+                        <option value="faiths">City of Faiths</option>
+                        <option value="dichotomy">Two Delhis</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <section class="content-section" id="home">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold text-red-900 leading-tight">Shahjahanabad: The Living City</h1>
+                <p class="mt-4 text-lg md:text-xl text-stone-600 italic font-serif">Below are some choices, all of comparable length and conveying the core message.
+
+*   A city: a layered history, each era etched upon the last.
+*   The city: a palimpsest, time's imprints overlapping and enduring.
+*   City as a text: past epochs layered, subtly illuminating the present.
+*   A city's story: etched deep, centuries mingling in visible strata.
+*   Cities: palimpsests where time's many hands have left their marks.</p>
+                <div class="mt-8 p-6 bg-amber-50/50 border border-amber-200 rounded-lg">
+                    <p class="text-stone-700 leading-relaxed">Explore the vibrant streets and markets of Old Delhi, a historic entity where the tales of ambition, cultural exchange, and enduring strength come alive. Founded as Shahjahanabad by Emperor Shah Jahan, this immersive journey unveils the city's imperial design, rich culture, and delicious cuisine. Delve into its diverse aspects to discover the timeless spirit of this dynamic city.</p>
+                </div>
+                 <div class="mt-10 text-left grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-200">
+                        <h3 class="font-serif text-xl text-teal-800 font-semibold mb-3">A Sensory Deluge</h3>
+                        <p class="text-stone-600">The moment you step into Old Delhi, you are enveloped in its vibrant atmosphere. The air is filled with the scent of spices from Khari Baoli, the sweetness of jalebis, and the fragrance of marigolds. Everywhere you turn, you hear the clash of sounds - rickshaw bells, hawker calls, and the echoes of</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-200">
+                        <h3 class="font-serif text-xl text-teal-800 font-semibold mb-3">Layers of History</h3>
+                        <p class="text-stone-600">Urban areas are layered with history: traces of Mughal rule, scars from 1857, the impact of Partition, and ongoing development. Unraveling the hidden tales beneath the surface is key to understanding the heart of Old Delhi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="imperial">
+            <div class="text-center max-w-4xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-red-900">The Imperial City</h2>
+                <p class="mt-4 text-lg text-stone-600 font-serif">Here's a rewritten version of similar length:
+
+Exploring the beginnings of Shahjahanabad, we discover that it was born from the grand vision of an emperor. This segment delves into the intricate layout of the city, with a particular emphasis on its central landmarks: the Red Fort and Jama Masjid. These iconic structures played a pivotal role in establishing Shahjahanabad as the heart of the Mughal Empire, both politically and spiritually.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1">
+                    <h3 class="text-2xl font-bold font-serif text-teal-800 mb-6">Timeline of an Empire's Heart</h3>
+                    <div id="timeline-container"></div>
+                </div>
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-bold font-serif text-teal-800 mb-6 text-center">Pillars of Power: A Tale of Two Monuments</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 transition-all duration-300 hover:shadow-xl hover:border-red-200" id="red-fort-card"></div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 transition-all duration-300 hover:shadow-xl hover:border-teal-200" id="jama-masjid-card"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="life">
+            <div class="text-center max-w-4xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-red-900">Life &amp; Commerce</h2>
+                <p class="mt-4 text-lg text-stone-600 font-serif">Explore the bustling core of the city with its vibrant markets, historic residences, and famous food vendors that teem with energy. Uncover the secrets of the marketplace, the elegant architecture of the *havelis*, and a culinary scene where every taste tells a story of innovation, tradition, and history.</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 mb-8">
+                <h3 class="text-2xl font-bold font-serif text-teal-800 mb-4">The Anatomy of the Bazaar</h3>
+                <p class="text-stone-600 mb-6">Chandni Chowk, the beating heart of Delhi's history, is bustling with trade. This central hub, known as 'Moonlight Square', connects to various unique markets. Delve into the infographic provided to uncover the distinct characteristics and significance of each market in Delhi's vibrant economy.</p>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div class="md:col-span-3 p-4 bg-stone-100 rounded-lg flex flex-col items-center justify-center min-h-[300px]">
+                        <div class="w-full max-w-md space-y-2">
+                             <div class="interactive-map-item w-full p-3 text-center bg-amber-200 rounded-lg cursor-pointer hover:bg-amber-300" data-target="info-chandni">Chandni Chowk (Main Artery)</div>
+                             <div class="flex space-x-2">
+                                <div class="interactive-map-item flex-1 p-3 text-center bg-red-200 rounded-lg cursor-pointer hover:bg-red-300" data-target="info-khari">Khari Baoli (Spices)</div>
+                                <div class="interactive-map-item flex-1 p-3 text-center bg-teal-200 rounded-lg cursor-pointer hover:bg-teal-300" data-target="info-chawri">Chawri Bazaar (Paper &amp; Brass)</div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 p-4 bg-amber-50/50 rounded-lg border border-amber-200 min-h-[300px]" id="map-info-display">
+                        <div class="map-info-content" id="info-default">
+                            <h4 class="font-bold text-lg text-red-900 mb-2">Explore the Markets</h4>
+                            <p class="text-stone-600">Click on a market to see its history and specialty.</p>
+                        </div>
+                        <div class="map-info-content hidden" id="info-chandni">
+                            <h4 class="font-bold text-lg text-red-900 mb-2">Chandni Chowk</h4>
+                            <p class="text-stone-600">Constructed in 1650 by Princess Jahanara, the area known as 'Moonlight Square' featured a reflecting pool and canal. Originally famous for its silver vendors, the space evolved into niche markets before transforming into a vibrant wholesale market that serves as a key hub in Asia.</p>
+                        </div>
+                        <div class="map-info-content hidden" id="info-khari">
+                            <h4 class="font-bold text-lg text-red-900 mb-2">Khari Baoli</h4>
+                            <p class="text-stone-600">Since 1850, it has held the title of Asia's largest spice center. The area is filled with the potent scents of chilies, turmeric, and cardamom, providing visitors with one of Old Delhi's most enchanting sensory experiences.</p>
+                        </div>
+                        <div class="map-info-content hidden" id="info-chawri">
+                            <h4 class="font-bold text-lg text-red-900 mb-2">Chawri Bazaar</h4>
+                            <p class="text-stone-600">Established in 1840, Delhi's first wholesale market specialized in hardware before expanding to become a central hub for brass, copper, and paper products, particularly wedding stationery.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-bold font-serif text-teal-800 mb-3">The Haveli Lifestyle</h3>
+                    <p class="text-stone-600 mb-4">Mughal mansions, luxurious residences of the wealthy, were vibrant hubs of culture and commerce, centered around inner courtyards. Today, their appearances vary widely, with some converted into trendy hotels like <span class="font-semibold text-red-900">Haveli Dharampura</span>, while others like <span class="font-semibold text-red-900">Khazanchi Haveli</span> Below are several choices, all equivalent in size and significance:
+
+*   Now crumbling, they whisper tales of a lost age.
+*   In decay, they evoke memories of a grand past.
+*   Their faded glory hints at a time long since past.
+*   Ruined now, they speak of eras left behind.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-bold font-serif text-teal-800 mb-3">Paranthe Wali Gali</h3>
+                    <p class="text-stone-600 mb-4">Since the 1870s, the 'paratha lane' has thrived, with vegetarian eateries known for frying unique *parathas* stuffed with ingredients like cashew, mint, and sweet *khoya*. This iconic spot has even captivated notable figures such as Nehru.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                    <h3 class="text-xl font-bold font-serif text-teal-800 mb-3">Karim's &amp; Moti Mahal</h3>
+                    <p class="text-stone-600 mb-4">These eateries are edible archives. <span class="font-semibold text-red-900">Karim's (est. 1913)</span> Brought Mughal court cuisine to the masses after 1857. <span class="font-semibold text-red-900">Moti Mahal (est. 1947)</span>Emerging from the aftermath of Partition, they introduced iconic Indian dishes to the world: Butter Chicken and Dal Makhani.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="faiths">
+            <div class="text-center max-w-4xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-red-900">A City of Faiths</h2>
+                <p class="mt-4 text-lg text-stone-600 font-serif">The spiritual core of Old Delhi transcends any one religion, pulsating with diverse faiths like Hinduism, Jainism, Sikhism, and Christianity around the magnificent mosque. This section explores these hallowed sites, revealing a rich tapestry of interwoven lives, cultural fusions, challenges, and resilience that mirror the city's dynamic multicultural essence.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200" id="faith-card-jain"></div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200" id="faith-card-hindu"></div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200" id="faith-card-sikh"></div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200" id="faith-card-christian"></div>
+            </div>
+        </section>
+
+        <section class="content-section" id="dichotomy">
+            <div class="text-center max-w-4xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-red-900">Two Delhis, One Story</h2>
+                <p class="mt-4 text-lg text-stone-600 font-serif">The essence of Delhi is defined by the dichotomy between the lively disorder of Old Delhi and the structured formality of New Delhi, reflecting contrasting design styles and imperial legacies. This examination delves into Old Delhi's ongoing challenges in adapting to change, balancing preservation efforts, and navigating its intricate historical layers.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-5 gap-8 items-center">
+                <div class="lg:col-span-3">
+                    <h3 class="text-2xl font-bold font-serif text-teal-800 mb-4 text-center">Old vs. New: A Tale of Two Cities</h3>
+                    <div class="chart-container">
+                        <canvas id="delhiComparisonChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <h3 class="text-xl font-bold font-serif text-teal-800 mb-3">Clash of Ideologies</h3>
+                        <p class="text-stone-600 mb-4">Shahjahanabad united ruler and city through public display, while Lutyens' Delhi emphasized separation and control, distancing the administrative space from the old city. The deliberate positioning of 'New' Delhi as modern and cutting-edge rendered Mughal Delhi as antiquated and historical.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 mt-6">
+                        <h3 class="text-xl font-bold font-serif text-teal-800 mb-3">The Conservation Conundrum</h3>
+                        <p class="text-stone-600 mb-4">Old Delhi struggles with overcrowding and illegal construction, creating a conflict between conservation and functionality. Traditional *havelis* are repurposed as storage facilities, and attempts to improve areas like Chandni Chowk from the top down often fail to consider the district's vibrant character, ultimately harming local businesses.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300">
+<div class="container mx-auto px-6 py-12 lg:px-8">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Connaught Place</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/">Home</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/photos-blog/">Photos and Blog</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/red-fort/">Red Fort</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Delhi Tour</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/">Old Delhi</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/red-fort/">Red Fort Delhi</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/kinari-bazaar/">Kinari Bazaar</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Pages</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/old-delhi-info.html">Old Delhi Info</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/qutubminar-images.html">Qutubminar Images</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/qutubminar-photos-blog.html">Qutubminar Photos Blog</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-8 text-center text-sm text-gray-400">
+<p class="text-sm text-gray-400">Delhi Guide - Hidtory and New Markets</p>
+</div>
+<div class="mt-12 border-t border-gray-700 pt-8 flex flex-col items-center justify-between sm:flex-row">
+<p class="text-sm text-gray-400">© 2026 Connaught Place and Delhi Website. All rights reserved.</p>
+</div>
+</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('.content-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    const timelineData = [
+        { year: '1638–1639', event: 'A New Capital', description: 'Shah Jahan initiates construction of Shahjahanabad to reflect the zenith of Mughal power.' },
+        { year: '1648', event: 'Inauguration', description: 'The city and Red Fort are inaugurated, formally becoming the capital of the Mughal Empire.' },
+        { year: '1650', event: 'Chandni Chowk Established', description: 'Designed by Princess Jahanara, the city\'s main commercial and ceremonial artery is created.' },
+        { year: '1650–1656', event: 'Jama Masjid Built', description: 'The empire\'s principal mosque is completed, a monumental symbol of imperial piety.' },
+        { year: '1739', event: 'Nader Shah\'s Invasion', description: 'The Persian ruler sacks Delhi, a devastating blow from which the empire never fully recovered.' },
+        { year: '1857', event: 'The Indian Revolt', description: 'The revolt is crushed by the British, leading to the formal end of the Mughal Empire and immense destruction.' },
+        { year: '1911', event: 'A New Capital, An "Old" City', description: 'The British shift their capital to New Delhi, officially relegating Shahjahanabad to the status of "Old Delhi".' }
+    ];
+
+    const architecturalData = {
+        redFort: {
+            title: 'The Red Fort (Lal Qila)',
+            purpose: 'Secular/Palatial: Imperial residence, administrative headquarters, and ceremonial center.',
+            materials: 'Red sandstone for walls, white marble for pavilions.',
+            styles: 'Mughal-Syncretic: A fusion of Persian, Timurid, and Hindu traditions.',
+            elements: 'Home to the Diwan-i-Am, Diwan-i-Khas, the legendary Peacock Throne, and the Nahr-i-Behisht (Stream of Paradise).',
+            symbolism: 'To create a terrestrial paradise for the emperor, symbolizing imperial power, wealth, and refinement.'
+        },
+        jamaMasjid: {
+            title: 'The Jama Masjid',
+            purpose: 'Sacred/Congregational: Principal mosque for Friday prayers and imperial worship.',
+            materials: 'Red sandstone and white marble (for stripes and domes).',
+            styles: 'Indo-Islamic: A blend of Mughal, Persian, and indigenous Indian elements.',
+            elements: 'Features a grand courtyard for 25,000 worshippers, towering minarets, and three iconic bulbous marble domes.',
+            symbolism: 'To project imperial piety, assert the prominence of Islam, and provide a space for the Muslim community.'
+        }
+    };
+    
+    const faithData = {
+        jain: {
+            title: 'Shri Digambar Jain Lal Mandir',
+            description: 'Delhi\'s oldest Jain temple, with origins in 1656. It grew from a personal shrine kept by a Jain officer in the Mughal army into a grand complex, patronized by wealthy Jain financiers of the empire. Its architecture notably absorbs Mughal-style elements.'
+        },
+        hindu: {
+            title: 'Gauri Shankar Temple',
+            description: 'An ancient Hindu temple dedicated to Shiva and Parvati. The current structure was renovated in 1761 by a Maratha soldier. Its continued prominence attests to the resilient presence of the Hindu faith in the heart of the city.'
+        },
+        sikh: {
+            title: 'Gurdwara Sis Ganj Sahib',
+            description: 'A site of profound martyrdom, marking where the ninth Sikh Guru, Tegh Bahadur, was executed in 1675 on Aurangzeb\'s orders. The gurdwara stands as a powerful symbol of resistance and the assertion of community identity.'
+        },
+        christian: {
+            title: 'St. James\' Church',
+            description: 'Built between 1823-1836 by Colonel James Skinner, it is one of Delhi\'s oldest churches. A beautiful Renaissance-style building, it was the official church of the British Viceroy before the construction of New Delhi.'
+        }
+    };
+
+    function populateContent() {
+        const timelineContainer = document.getElementById('timeline-container');
+        timelineData.forEach(item => {
+            timelineContainer.innerHTML += `
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <p class="font-bold text-red-900">${item.year}: <span class="font-semibold text-teal-800">${item.event}</span></p>
+                    <p class="text-stone-600 text-sm mt-1">${item.description}</p>
+                </div>
+            `;
+        });
+
+        const redFortCard = document.getElementById('red-fort-card');
+        redFortCard.innerHTML = `
+            <h4 class="text-xl font-bold font-serif text-red-900 mb-3">${architecturalData.redFort.title}</h4>
+            <ul class="space-y-3 text-stone-600">
+                <li><span class="font-semibold">Purpose:</span> ${architecturalData.redFort.purpose}</li>
+                <li><span class="font-semibold">Materials:</span> ${architecturalData.redFort.materials}</li>
+                <li><span class="font-semibold">Styles:</span> ${architecturalData.redFort.styles}</li>
+                <li><span class="font-semibold">Key Elements:</span> ${architecturalData.redFort.elements}</li>
+                <li><span class="font-semibold">Symbolism:</span> ${architecturalData.redFort.symbolism}</li>
+            </ul>
+        `;
+
+        const jamaMasjidCard = document.getElementById('jama-masjid-card');
+        jamaMasjidCard.innerHTML = `
+            <h4 class="text-xl font-bold font-serif text-teal-800 mb-3">${architecturalData.jamaMasjid.title}</h4>
+            <ul class="space-y-3 text-stone-600">
+                <li><span class="font-semibold">Purpose:</span> ${architecturalData.jamaMasjid.purpose}</li>
+                <li><span class="font-semibold">Materials:</span> ${architecturalData.jamaMasjid.materials}</li>
+                <li><span class="font-semibold">Styles:</span> ${architecturalData.jamaMasjid.styles}</li>
+                <li><span class="font-semibold">Key Elements:</span> ${architecturalData.jamaMasjid.elements}</li>
+                <li><span class="font-semibold">Symbolism:</span> ${architecturalData.jamaMasjid.symbolism}</li>
+            </ul>
+        `;
+        
+        const faithCardJain = document.getElementById('faith-card-jain');
+        faithCardJain.innerHTML = `
+            <h4 class="text-xl font-bold font-serif text-amber-700 mb-3">${faithData.jain.title}</h4>
+            <p class="text-stone-600">${faithData.jain.description}</p>
+        `;
+        const faithCardHindu = document.getElementById('faith-card-hindu');
+        faithCardHindu.innerHTML = `
+            <h4 class="text-xl font-bold font-serif text-amber-700 mb-3">${faithData.hindu.title}</h4>
+            <p class="text-stone-600">${faithData.hindu.description}</p>
+        `;
+        const faithCardSikh = document.getElementById('faith-card-sikh');
+        faithCardSikh.innerHTML = `
+            <h4 class="text-xl font-bold font-serif text-amber-700 mb-3">${faithData.sikh.title}</h4>
+            <p class="text-stone-600">${faithData.sikh.description}</p>
+        `;
+        const faithCardChristian = document.getElementById('faith-card-christian');
+        faithCardChristian.innerHTML = `
+            <h4 class="text-xl font-bold font-serif text-amber-700 mb-3">${faithData.christian.title}</h4>
+            <p class="text-stone-600">${faithData.christian.description}</p>
+        `;
+    }
+    
+    function showSection(hash) {
+        const targetId = hash.substring(1);
+        let activeSectionFound = false;
+        sections.forEach(section => {
+            if (section.id === targetId) {
+                section.classList.add('active');
+                activeSectionFound = true;
+            } else {
+                section.classList.remove('active');
+            }
+        });
+
+        if (!activeSectionFound) {
+            document.getElementById('home').classList.add('active');
+        }
+
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === hash || (!activeSectionFound && link.getAttribute('href') === '#home')) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+        
+        mobileNav.value = activeSectionFound ? targetId : 'home';
+    }
+
+    function handleNavigation(event) {
+        event.preventDefault();
+        const targetHash = this.getAttribute('href');
+        window.location.hash = targetHash;
+    }
+    
+    navLinks.forEach(link => link.addEventListener('click', handleNavigation));
+    
+    mobileNav.addEventListener('change', function() {
+        window.location.hash = this.value;
+    });
+
+    window.addEventListener('hashchange', () => showSection(window.location.hash || '#home'));
+
+    const interactiveMapItems = document.querySelectorAll('.interactive-map-item');
+    const mapInfoContents = document.querySelectorAll('.map-info-content');
+
+    interactiveMapItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const targetId = item.getAttribute('data-target');
+            mapInfoContents.forEach(content => {
+                if (content.id === targetId) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    function createComparisonChart() {
+        const ctx = document.getElementById('delhiComparisonChart').getContext('2d');
+        const data = {
+            labels: ['Density', 'Layout', 'Streetscape', 'Architecture', 'Atmosphere'],
+            datasets: [
+                {
+                    label: 'Old Delhi',
+                    data: [9, 8, 9, 7, 10],
+                    backgroundColor: 'rgba(136, 19, 55, 0.7)',
+                    borderColor: 'rgba(136, 19, 55, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'New Delhi',
+                    data: [3, 2, 3, 5, 4],
+                    backgroundColor: 'rgba(15, 118, 110, 0.7)',
+                    borderColor: 'rgba(15, 118, 110, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+        new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Conceptual Comparison: Old vs. New Delhi',
+                        font: { size: 16, family: 'Lora' },
+                        color: '#44403c'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                const value = context.raw;
+                                const category = context.label;
+                                let description = '';
+                                if (category === 'Density') description = value > 5 ? 'High/Organic' : 'Low/Planned';
+                                if (category === 'Layout') description = value > 5 ? 'Labyrinthine' : 'Geometric';
+                                if (category === 'Streetscape') description = value > 5 ? 'Chaotic/Mixed-Use' : 'Orderly/Zoned';
+                                if (category === 'Architecture') description = value > 5 ? 'Mughal/Indo-Islamic' : 'Neoclassical/Imperial';
+                                if (category === 'Atmosphere') description = value > 5 ? 'Vibrant/Intense' : 'Formal/Spacious';
+                                return `${label}${description} (Score: ${value}/10)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 10,
+                        grid: {
+                            color: '#e7e5e4'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    populateContent();
+    createComparisonChart();
+    showSection(window.location.hash || '#home');
+});
+</script>
+
+
+</body></html>

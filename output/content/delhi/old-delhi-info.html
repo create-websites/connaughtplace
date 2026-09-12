@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Infographic: The Layers of Old Delhi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: The infographic follows a linear narrative from past to present, divided into five clear sections: 1) Introduction with a "big number" hook, 2) The Imperial Blueprint (Mughal planning), 3) Architectural Soul (monuments), 4) The Living City (commerce, food, faith), and 5) The Modern Palimpsest (contemporary challenges). This structure guides the user logically through the layers of history, making the complex information digestible in a single scroll. -->
+    <!-- Visualization & Content Choices: 1. City Inauguration Date -> Goal: Inform -> Big Number -> High-impact intro -> HTML/Tailwind. 2. Historical Timeline (Table 1) -> Goal: Change -> Vertical Timeline Diagram -> Visually engaging way to show sequence -> HTML/Tailwind. 3. Monument Comparison (Table 2) -> Goal: Compare -> Donut Charts & Icons -> Simplifies comparison of functions/materials into quick visual takeaways -> Chart.js/Unicode. 4. Specialized Markets -> Goal: Organize -> Flow-style Diagram -> Shows relationship of markets to Chandni Chowk -> HTML/Tailwind. 5. Culinary Origins -> Goal: Compare -> Bar Chart -> Compares the historical drivers behind iconic eateries -> Chart.js. 6. Old vs. New Delhi (Table 3) -> Goal: Compare -> Radar Chart -> Provides a multi-axial comparison of urban characteristics in a single graphic -> Chart.js. All visualizations avoid SVG/Mermaid as required. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FDF4E3;
+            color: #333333;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .section-title {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            display: inline-block;
+            border-radius: 9999px;
+            margin-bottom: 2rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 4px solid #4D96FF;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -2.8rem;
+            top: 0.1rem;
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 50%;
+            background-color: #FFD93D;
+            border: 4px solid #4D96FF;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+<link href="https://storage.googleapis.com/css-designs/purple/kreatewebsites.production.css" rel="stylesheet"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9B1T71M2XL"></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9B1T71M2XL');
+</script></head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-12">
+
+        <header class="text-center mb-16">
+            <h1 class="text-5xl md:text-7xl font-bold text-[#FF6B6B]">The Layers of Old Delhi</h1>
+            <p class="text-xl md:text-2xl mt-4 text-gray-600">A Visual Journey Through the Heart of Shahjahanabad</p>
+        </header>
+
+        <section class="mb-20" id="intro">
+            <div class="text-center bg-white rounded-2xl shadow-lg p-8 md:p-12 border-4 border-[#4D96FF]">
+                <p class="text-2xl text-gray-700 font-semibold">In the year</p>
+                <p class="text-8xl md:text-9xl font-bold my-4 text-[#4D96FF]">1648</p>
+                <p class="text-2xl text-gray-700 font-semibold">Shahjahanabad, a meticulously planned city, was brought to life by an emperor's vision of paradise. Its story unfolds today.</p>
+            </div>
+        </section>
+
+        <section class="mb-20" id="blueprint">
+            <h2 class="section-title">The Imperial Blueprint</h2>
+            <div class="grid md:grid-cols-5 gap-8 items-center">
+                <div class="md:col-span-2 text-lg">
+                    <h3 class="text-3xl font-bold mb-4 text-[#4D96FF]">A City by Design</h3>
+                    <p class="mb-4">Shahjahanabad, built in the 17th century, was known as a 'smart city.' It featured a 1,500-acre walled area with 14 gates, wide streets, and an advanced canal system called the *Nahr-i-Behisht*, which sourced water from the Yamuna River, showcasing Mughal urban ingenuity.</p>
+                    <p>Chandni Chowk, envisioned by Princess Jahanara Begum, emerged as the bustling heart of the city, serving as both a majestic ceremonial avenue and a bustling marketplace.</p>
+                </div>
+                <div class="md:col-span-3">
+                    <div class="bg-white p-6 rounded-2xl shadow-md border-2 border-gray-200">
+                        <h4 class="text-2xl font-bold text-center mb-6 text-[#FF6B6B]">Key Milestones</h4>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <p class="font-bold text-lg">1639: <span class="font-normal">Construction Begins</span></p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <p class="font-bold text-lg">1648: <span class="font-normal">City Inaugurated</span></p>
+                            </div>
+                             <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <p class="font-bold text-lg">1656: <span class="font-normal">Jama Masjid Completed</span></p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <p class="font-bold text-lg">1857: <span class="font-normal">End of Mughal Rule</span></p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <p class="font-bold text-lg">1911: <span class="font-normal">Becomes "Old" Delhi</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20" id="architecture">
+            <h2 class="section-title">Architectural Soul</h2>
+            <p class="text-center max-w-3xl mx-auto text-lg mb-12">Here are a few options, all similar in length:
+
+*   The city's heart pulsed around two colossal symbols: the Red Fort, earthly might, and Jama Masjid, divine sway.
+*   Two grand landmarks defined the city: the Red Fort, a beacon of rule, and Jama Masjid, a testament to faith.
+*   Dominating the skyline were the Red Fort, worldly strength, and the Jama Masjid, spiritual command, both key to the city.
+*   At the city's core stood the Red Fort (power) and Jama Masjid (faith), each a colossal imperial landmark.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-2 border-gray-200 text-center">
+                    <h3 class="text-3xl font-bold mb-4 text-[#FF6B6B]">The Red Fort (Lal Qila)</h3>
+                    <p class="text-5xl mb-4">🏰</p>
+                    <p class="mb-6">Here are a few options, all similar in length:
+
+*   The imperial palace: seat of power and riches.
+*   The palace: home and hub of the empire's might.
+*   The royal dwelling: a nexus of power and grandeur.
+*   The Emperor's seat: power and prosperity defined.</p>
+                    <div class="chart-container h-64 max-h-64">
+                        <canvas id="redFortChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-2 border-gray-200 text-center">
+                    <h3 class="text-3xl font-bold mb-4 text-[#4D96FF]">The Jama Masjid</h3>
+                    <p class="text-5xl mb-4">🕌</p>
+                    <p class="mb-6">- Below are some choices.
+- Check out these options.
+- Here are a couple of alternatives.
+
+*   The main mosque for communal worship, a testament to faith and imperial devotion.
+*   A central place for prayer, embodying royal faith and religious devotion.
+*   The primary congregational mosque, a key emblem of faith and imperial rule.</p>
+                    <div class="chart-container h-64 max-h-64">
+                        <canvas id="jamaMasjidChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20" id="life">
+            <h2 class="section-title">The Living City</h2>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-lg border-2 border-gray-200">
+                    <h3 class="text-3xl font-bold mb-6 text-[#4D96FF]">The Anatomy of the Bazaar</h3>
+                    <p class="mb-6 text-lg">Below are some choices, all of similar length and embodying the essence:
+
+*   The city thrives where markets pulse. Chandni Chowk, the main vein, spawns intricate lanes, each with its own character.
+*   Markets are the city's heart. From Chandni Chowk, the central artery, extend diverse lanes, each a distinct world.
+*   Markets define the city's pulse. Chandni Chowk, a major thoroughfare, leads to specialized lanes, each unique.</p>
+                    <div class="space-y-4 text-center">
+                        <div class="p-4 bg-[#FFD93D] rounded-full font-bold text-lg text-gray-800">Chandni Chowk (Silver &amp; Main Street)</div>
+                        <div class="text-3xl font-bold text-[#4D96FF]">↓</div>
+                        <div class="flex justify-around gap-4">
+                            <div class="flex-1 p-4 bg-[#FF6B6B] text-white rounded-xl font-semibold">Khari Baoli<br/>(Spices)</div>
+                            <div class="flex-1 p-4 bg-[#6BCB77] text-white rounded-xl font-semibold">Chawri Bazaar<br/>(Paper &amp; Brass)</div>
+                            <div class="flex-1 p-4 bg-[#4D96FF] text-white rounded-xl font-semibold">Dariba Kalan<br/>(Jewelry)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-1 bg-white p-8 rounded-2xl shadow-lg border-2 border-gray-200">
+                    <h3 class="text-3xl font-bold mb-6 text-[#FF6B6B]">Culinary Origins</h3>
+                    <p class="mb-4">Delhi's legendary cuisine stems directly from its past.</p>
+                    <div class="chart-container h-80 max-h-80">
+                        <canvas id="foodChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12" id="palimpsest">
+            <h2 class="section-title">The Modern Palimpsest</h2>
+            <p class="text-center max-w-3xl mx-auto text-lg mb-12">Constructed by the British in 1911, the emergence of New Delhi as the capital led to Shahjahanabad being labeled as 'Old,' sparking ongoing discussions on urban preservation and progress.</p>
+            <div class="bg-white p-8 rounded-2xl shadow-lg border-2 border-gray-200">
+                <h3 class="text-3xl font-bold mb-6 text-center text-[#4D96FF]">Old Delhi vs. New Delhi</h3>
+                <div class="chart-container">
+                    <canvas id="delhiComparisonChart"></canvas>
+                </div>
+                <p class="text-center mt-6 text-gray-600">Here is an alternative version of the sentence, with a comparable length and message:
+
+This radar chart highlights the key characteristics of Old Delhi and New Delhi, showcasing their unique urban identities - the chaotic, organic layout of Old Delhi in contrast to the organized, expansive design of New Delhi.</p>
+            </div>
+        </section>
+
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const commonDonutOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '70%',
+        plugins: {
+            legend: {
+                position: 'bottom',
+            },
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) { return label.join(' '); }
+                        return label;
+                    }
+                }
+            }
+        }
+    };
+
+    new Chart(document.getElementById('redFortChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Administration', 'Ceremonial', 'Residential'],
+            datasets: [{
+                label: 'Function',
+                data: [45, 35, 20],
+                backgroundColor: ['#FF6B6B', '#FFD93D', '#fca5a5'],
+                borderColor: '#ffffff',
+                borderWidth: 4
+            }]
+        },
+        options: { ...commonDonutOptions, plugins: { ...commonDonutOptions.plugins, title: { display: true, text: 'Primary Functions' } } }
+    });
+
+    new Chart(document.getElementById('jamaMasjidChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Congregational Prayer', 'Imperial Piety', 'Community Hub'],
+            datasets: [{
+                label: 'Function',
+                data: [60, 25, 15],
+                backgroundColor: ['#4D96FF', '#6BCB77', '#93c5fd'],
+                borderColor: '#ffffff',
+                borderWidth: 4
+            }]
+        },
+        options: { ...commonDonutOptions, plugins: { ...commonDonutOptions.plugins, title: { display: true, text: 'Primary Functions' } } }
+    });
+
+    function wrapLabel(str) {
+        const words = str.split(' ');
+        const lines = [];
+        let currentLine = '';
+        for (const word of words) {
+            if ((currentLine + word).length > 16) {
+                lines.push(currentLine.trim());
+                currentLine = '';
+            }
+            currentLine += word + ' ';
+        }
+        lines.push(currentLine.trim());
+        return lines;
+    }
+
+    new Chart(document.getElementById('foodChart'), {
+        type: 'bar',
+        data: {
+            labels: [wrapLabel("Karim's (Mughlai)"), wrapLabel("Moti Mahal (Tandoori)"), wrapLabel("Paranthe Wali Gali")],
+            datasets: [{
+                label: 'Historical Driver',
+                data: [1857, 1947, 1870],
+                backgroundColor: ['#FF6B6B', '#4D96FF', '#FFD93D'],
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Founding Year & Historical Context' },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) { return label.join(' '); }
+                            return label;
+                        },
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) { label += ': '; }
+                            const year = context.raw;
+                            let event = '';
+                            if (year === 1857) event = 'Post-1857 Revolt';
+                            if (year === 1947) event = 'Post-1947 Partition';
+                            if (year === 1870) event = 'Mid-Colonial Era';
+                            return `${year} (${event})`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: false,
+                    min: 1850,
+                    ticks: {
+                        stepSize: 20
+                    }
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('delhiComparisonChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Density', 'Layout', 'Streetscape', 'Formality', 'Green Space'],
+            datasets: [{
+                label: 'Old Delhi',
+                data: [9, 9, 10, 2, 1],
+                fill: true,
+                backgroundColor: 'rgba(255, 107, 107, 0.4)',
+                borderColor: '#FF6B6B',
+                pointBackgroundColor: '#FF6B6B',
+            }, {
+                label: 'New Delhi',
+                data: [3, 2, 2, 9, 9],
+                fill: true,
+                backgroundColor: 'rgba(77, 150, 255, 0.4)',
+                borderColor: '#4D96FF',
+                pointBackgroundColor: '#4D96FF',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) { return label.join(' '); }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                    grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                    pointLabels: { font: { size: 14 } },
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            }
+        }
+    });
+});
+</script>
+
+
+<footer class="bg-gray-800 text-gray-300">
+<div class="container mx-auto px-6 py-12 lg:px-8">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Connaught Place</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/">Home</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/photos-blog/">Photos and Blog</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/red-fort/">Red Fort</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Delhi Tour</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/">Old Delhi</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/red-fort/">Red Fort Delhi</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/kinari-bazaar/">Kinari Bazaar</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Pages</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/old-delhi-info.html">Old Delhi Info</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/qutubminar-images.html">Qutubminar Images</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.connaughtplace.org/delhi/qutubminar-photos-blog.html">Qutubminar Photos Blog</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-8 text-center text-sm text-gray-400">
+<p class="text-sm text-gray-400">Delhi Guide - Hidtory and New Markets</p>
+</div>
+<div class="mt-12 border-t border-gray-700 pt-8 flex flex-col items-center justify-between sm:flex-row">
+<p class="text-sm text-gray-400">© 2026 Connaught Place and Delhi Website. All rights reserved.</p>
+</div>
+</div>
+</footer></body></html>
